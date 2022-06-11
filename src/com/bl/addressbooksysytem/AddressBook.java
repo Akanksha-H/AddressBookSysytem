@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class AddressBook {
     static ArrayList<UserContactInformation> infoArrayList = new ArrayList<>();
+    static final int EDIT_CONTACT = 1;
 
     public static void main(String[] args) {
         System.out.println("WELCOME TO THE ADDRESS_BOOK");
@@ -12,6 +13,17 @@ public class AddressBook {
         System.out.println("Add new contact to the AddressBook: ");
         AddressBook addContact = new AddressBook();
         addContact.addContact();
+
+        System.out.println("Enter the choice 1: Edit Contact");
+        Scanner scanner = new Scanner(System.in);
+        int option = scanner.nextInt();
+
+        switch (option) {
+            case EDIT_CONTACT:
+                AddressBook editContact1 = new AddressBook();
+                editContact1.editContact();
+                break;
+        }
     }
 
     public void addContact() {
@@ -48,5 +60,63 @@ public class AddressBook {
                 + user1.getZip() + "\n" + "Number = " + user1.getNumber());
 
         infoArrayList.add(user1);
+    }
+
+    void editContact() {
+        UserContactInformation contactInfo = new UserContactInformation();
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Enter name  : ");
+        String firstName = scanner.next();
+        for (int i = 0; i < infoArrayList.size(); i++) {
+            if (firstName.equals(infoArrayList.get(i).getFirstName())) {
+                contactInfo = infoArrayList.get(i);
+            } else {
+                System.out.println("Put valid data");
+            }
+            System.out.println("Enter value of data you want to edit. 1:Name 2:Last Name 3:Locality 4:City 5:State 6:Email 7:Zip 8:Mobile");
+            int option = scanner.nextInt();
+
+            switch (option) {
+                case 1:
+                    System.out.print("Enter new name: ");
+                    contactInfo.setFirstName(scanner.next());
+                    break;
+
+                case 2:
+                    System.out.print("Enter new last name: ");
+                    contactInfo.setLastName(scanner.next());
+                    break;
+
+                case 3:
+                    System.out.print("Enter new  locality name: ");
+                    contactInfo.setLocality(scanner.next());
+                    break;
+
+                case 4:
+                    System.out.print("Enter new city name: ");
+                    contactInfo.setCity(scanner.next());
+                    break;
+
+                case 5:
+                    System.out.print("Enter new state name: ");
+                    contactInfo.setState(scanner.next());
+                    break;
+
+                case 6:
+                    System.out.print("Enter new email: ");
+                    contactInfo.setEmail(scanner.next());
+                    break;
+
+                case 7:
+                    System.out.print("Enter new zip: ");
+                    contactInfo.setZip(scanner.nextInt());
+                    break;
+
+                case 8:
+                    System.out.print("Enter new mobile number: ");
+                    contactInfo.setNumber(scanner.nextLong());
+                    break;
+            }
+        }
     }
 }
