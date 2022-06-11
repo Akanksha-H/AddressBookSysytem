@@ -6,6 +6,7 @@ import java.util.Scanner;
 public class AddressBook {
     static ArrayList<UserContactInformation> infoArrayList = new ArrayList<>();
     static final int EDIT_CONTACT = 1;
+    static final int DELETE_CONTACT = 2;
 
     public static void main(String[] args) {
         System.out.println("WELCOME TO THE ADDRESS_BOOK");
@@ -14,7 +15,7 @@ public class AddressBook {
         AddressBook addContact = new AddressBook();
         addContact.addContact();
 
-        System.out.println("Enter the choice 1: Edit Contact");
+        System.out.println("Enter the choice 1: Edit Contact 2: Delete Contact");
         Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
 
@@ -22,6 +23,11 @@ public class AddressBook {
             case EDIT_CONTACT:
                 AddressBook editContact1 = new AddressBook();
                 editContact1.editContact();
+                break;
+
+            case DELETE_CONTACT:
+                AddressBook deleteContact = new AddressBook();
+                deleteContact.deleteContact();
                 break;
         }
     }
@@ -116,6 +122,20 @@ public class AddressBook {
                     System.out.print("Enter new mobile number: ");
                     contactInfo.setNumber(scanner.nextLong());
                     break;
+            }
+        }
+    }
+
+    void deleteContact() {
+        System.out.println("Name the contact you want to delete = ");
+        Scanner scanner = new Scanner(System.in);
+        String firstName1 = scanner.next();
+        for (int i = 0; i < infoArrayList.size(); i++) {
+            if (firstName1.equals(infoArrayList.get(i).getFirstName())) {
+                infoArrayList.remove(infoArrayList.get(i));
+                System.out.println("Contact deleted");
+            } else {
+                System.out.println("Put valid data");
             }
         }
     }
