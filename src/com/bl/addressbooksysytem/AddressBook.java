@@ -1,5 +1,7 @@
 package com.bl.addressbooksysytem;
 
+import com.sun.prism.impl.shape.BasicShapeRep;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -8,15 +10,20 @@ public class AddressBook {
     static final int EDIT_CONTACT = 1;
     static final int DELETE_CONTACT = 2;
 
-    public static void main(String[] args) {
+    public void main() {
         System.out.println("WELCOME TO THE ADDRESS_BOOK");
 
-        System.out.println("Add new contact to the AddressBook: ");
-        AddressBook addContact = new AddressBook();
-        addContact.addContact();
+        //Create Scanner object to read command line input
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Add contacts into AddressBook");
+
+        System.out.println("Please enter no of times you want to add a contact: ");
+        int noOfContacts = scanner.nextInt();
+        for (int i = 1; i <= noOfContacts; i++) {
+            addContact();
+        }
 
         System.out.println("Enter the choice 1: Edit Contact 2: Delete Contact");
-        Scanner scanner = new Scanner(System.in);
         int option = scanner.nextInt();
 
         switch (option) {
@@ -35,6 +42,9 @@ public class AddressBook {
     public void addContact() {
         UserContactInformation user1 = new UserContactInformation();
         Scanner scanner = new Scanner(System.in);
+
+        if(!infoArrayList.add(user1))
+            System.out.println("Sorry this name already included");
 
         System.out.print("Enter name: ");
         user1.setFirstName(scanner.nextLine());
@@ -60,10 +70,10 @@ public class AddressBook {
         System.out.print("Enter mobile number: ");
         user1.setNumber(scanner.nextLong());
 
-        System.out.println("Details of User" + "\n" + "FirstName = " + user1.getFirstName() + "\n" + "LastName = "
-                + user1.getLastName() + "\n" + "Locality = " + user1.getLocality() + "\n" + "City = " + user1.getCity()
-                + "\n" + "State = " + user1.getState() + "\n" + "Email =" + user1.getEmail() + "\n" + "Zip ="
-                + user1.getZip() + "\n" + "Number = " + user1.getNumber());
+        System.out.println("Details of User: " + "  FirstName = " + user1.getFirstName() + "  LastName = "
+                + user1.getLastName() + "  Locality = " + user1.getLocality() + "  City = " + user1.getCity()
+                + "  State = " + user1.getState() + "  Email =" + user1.getEmail() + "  Zip ="
+                + user1.getZip() + "  Number = " + user1.getNumber());
 
         infoArrayList.add(user1);
     }
@@ -79,7 +89,8 @@ public class AddressBook {
             } else {
                 System.out.println("Put valid data");
             }
-            System.out.println("Enter value of data you want to edit. 1:Name 2:Last Name 3:Locality 4:City 5:State 6:Email 7:Zip 8:Mobile");
+            System.out.println("Enter value of data you want to edit. 1:Name 2:Last Name 3:Locality"
+                    + " 4:City 5:State 6:Email 7:Zip 8:Mobile");
             int option = scanner.nextInt();
 
             switch (option) {
